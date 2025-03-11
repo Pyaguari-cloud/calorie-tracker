@@ -1,22 +1,16 @@
 import { Activity } from "../types"
-import { ActionDispatch } from "react"
-import { ActivityActions } from "../reducers/activity-reducer"
 import { categories } from "../data/categories"
 import { PencilSquareIcon, TrashIcon } from "@heroicons/react/24/outline"
+import { useActivity } from "../hooks/useActivity"
 
-
-
-type ActitiyListProps = {
-    activities: Activity[],
-    dispatch: ActionDispatch<[action: ActivityActions]>
-}
-
-export const ActivityList = ({ activities, dispatch }: ActitiyListProps) => {
+export const ActivityList = () => {
 
     const categoryName = (category:Activity['category'])=> (
         categories.map( cat => cat.id === category ? cat.name : '' )
-    )  
+    )
 
+    const {state, dispatch} = useActivity()
+    const { activities } = state
     return (
         <>
             <h2 className="text-4xl font-bold text-slate-600 text-center">Comidas y Actividades</h2>
